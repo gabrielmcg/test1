@@ -38,9 +38,9 @@ jobs:
         echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}"
         unzip ./downloads/dita-ot-2.5.4.zip
         ls -lr .
-        ls ./downloads/dita-ot-2.5.4
-        ls ./downloads/dita-ot-2.5.4/bin
-        ls ./downloads/dita-ot-2.5.4/bin/dita
+        ls ./dita-ot-2.5.4
+        ls ./dita-ot-2.5.4/bin
+        ls ./dita-ot-2.5.4/bin/dita
       
     
     - name: checkout master
@@ -57,7 +57,7 @@ jobs:
         
     - name: run dita-ot
       run: |
-        ./downloads/dita-ot-2.5.4/bin/dita -i ./dita-in/src/helion.ditamap -f xhtml -o ./dita-out/helion/
+        ./dita-ot-2.5.4/bin/dita -i ./dita-in/src/helion.ditamap -f xhtml -o ./dita-out/helion/
     
     - name: commit
       run: |      
