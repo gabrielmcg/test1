@@ -38,6 +38,9 @@ jobs:
         echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}"
         unzip ./downloads/dita-ot-2.5.4.zip
         ls -lr .
+        ls ./downloads/dita-ot-2.5.4
+        ls ./downloads/dita-ot-2.5.4/bin
+        ls ./downloads/dita-ot-2.5.4/bin/dita
       
     
     - name: checkout master
