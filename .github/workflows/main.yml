@@ -29,4 +29,22 @@ jobs:
         location: './downloads'
        
     - name: Print the file path
-      run: echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}"
+      run: |
+        echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}"
+        unzip ./dowmloads/dita-ot-2.5.4.zip
+        ls -lr .
+      
+    
+    - name: checkout master
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        path: dita-in
+        
+    - name: checkout gh pages
+      uses: actions/checkout@v2
+      with:
+        ref: gh-pages 
+        path: dita-out         
+        
+              
