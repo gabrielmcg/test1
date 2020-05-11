@@ -54,7 +54,7 @@ jobs:
         
     - name: run dita-ot
       run: |
-        ./downloads/dita-ot-2.5.4/bin/dita-ot -i ./dita-in/src/helion.ditamap -f xhtml -o ./dita-out/helion/
+        ./downloads/dita-ot-2.5.4/bin/dita -i ./dita-in/src/helion.ditamap -f xhtml -o ./dita-out/helion/
     
     - name: commit
       run: |      
