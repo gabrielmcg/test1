@@ -33,14 +33,11 @@ jobs:
         file-name: 'dita-ot-2.5.4.zip'
         location: './downloads'
        
-    - name: Print the file path
+    - name: Unzip the file
       run: |
         echo "The file was downloaded to ${{ steps.download-poetry.outputs.file-path }}"
         unzip ./downloads/dita-ot-2.5.4.zip
-        ls -lr .
-        ls ./dita-ot-2.5.4
-        ls ./dita-ot-2.5.4/bin
-        ls ./dita-ot-2.5.4/bin/dita
+
       
     
     - name: checkout master
