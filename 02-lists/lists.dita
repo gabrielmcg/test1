@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="simple-topic">
+  <title>Main topic title</title>
+  <body>
+    <p>My favourite fruit</p>
+        
+    <ul>
+      <li>apples</li>
+      <li>oranges</li>
+    </ul>
+    
+    <p>My favourite dogs:</p>
+    
+    <ol>
+      <li>Border collies</>
+      <li>West Highland White Terriers</li>
+    </ol>
+    
+  </body>
+</topic>
