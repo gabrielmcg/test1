@@ -55,6 +55,7 @@ jobs:
     - name: run dita-ot
       run: |
         ./dita-ot-2.5.4/bin/dita -i ./dita-in/src/01topic/simple-topic.ditamap -f xhtml -o ./dita-out/01topic/
+        ./dita-ot-2.5.4/bin/dita -i ./dita-in/src/02-lists/lists.ditamap -f xhtml -o ./dita-out/02-lists/
     
     - name: commit
       run: |      
