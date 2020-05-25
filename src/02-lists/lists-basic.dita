@@ -26,7 +26,7 @@
 
       <dlentry>
         <dt>bit</dt>
-        <ddA bit is a single digit number that is in base of 2 (either a zero or one). Bandwidth usage is measured in bits per second.</dd>
+        <dd>A bit is a single digit number that is in base of 2 (either a zero or one). Bandwidth usage is measured in bits per second.</dd>
       </dlentry>
       
     </dl>    
