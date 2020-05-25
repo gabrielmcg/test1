@@ -14,6 +14,11 @@
         <p>H<sub>2</sub>O   and E=mc<sup>2</sup>  </p>
         
         <p>Link to <xref href="https://google.com" scope="external" format="html">Google's website</xref> </p>
-            
+        
+        <p>some text here<fn>footnote content</fn> and more</p>
+        
+        <p>general content with  <ph>an embedded phrase</ph> in the middle</p>
+        
+        
     </body>
 </topic>
