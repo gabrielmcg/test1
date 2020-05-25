@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="basics">
+    <title>Basics</title>
+    <body>
+        <p>Plain paragraph</p>
+        
+        <note type="tip">Don't do this</note>
+        <note type="important">Don't do this</note>
+        <note type="caution">Don't do this</note>
+        <note type="attention">Don't do this</note>
+        <note type="warning">Don't do this</note>
+        <note type="danger">Told you not to do this</note>
+        
+        
+        
+    </body>
+</topic>        
+
+<!--
+(note | tip | fastpath | restriction | important | remember | attention | caution | notice | danger | warning | other | -dita-use-​conref-​target)
+
+-->
