@@ -6,5 +6,6 @@
     <title>List examples</title>
    
     <topicref href="lists-basic.dita"/>
+    <topicref href="lists-nested.dita"/>
     
 </map>
