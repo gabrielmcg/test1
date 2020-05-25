@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="simple-topic">
+    <title>Basics</title>
+    <body>
+        <p>Plain paragraph</p>
+        
+        <p>Bolded <b>text</b> here </p>
+        
+        <p>Italic <i>text</i> here </p>
+        
+        <p>Bold italic <b><i>text</i></b> here </p>
+        
+        <p>H<sub>2</sub>O   and E=mc<sup>2</sup>  </p>
+        
+        
+            
+    </body>
+</topic>
