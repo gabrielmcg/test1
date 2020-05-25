@@ -5,6 +5,7 @@
 
     <title>Map title</title>
    
-    <topicref href="basics.dita" navtitle="My first topic"/>
+    <topicref href="basics.dita" navtitle="Basics"/>
+    <topicref href="blocks.dita" navtitle="Blocks"/>
     
 </map>
