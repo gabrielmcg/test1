@@ -1,10 +1,51 @@
 == Getting started with Apiman
 
-The article will help you to get up and running with Apiman, an open-source API management and gateway offering.
+This article will help you to get up and running with *apiman*, an open-source API management and gateway offering.
 
-=== Overview
+=== Apiman overview
 
-APIs are becoming pervasive in the enterprise:
+APIs are becoming pervasive in the modern enterprise. External facing APIs allow 3rd party access to your company's content and services, while the trend towards microservices 
+results in loosely coupled services, connected by multiple internal APIs. Using an API gateway helps you to centralize the management of your APIs, providing support for common features such as security, qoutas, logging and caching.
 
-* Internally for microservice 
-* Externally to allow controlled 3rd party access to your company's valuable content  and services
+http://www.apiman.io[Apiman] is an open-source API management offering, that makes it easy to control, distribute and monitor your APIs. It consists of two main components:
+
+* An easy-to-use management interface that helps you to define centralized policies for your APIs  
+* A runtime gateway component that executes the rules defined in the configured policies 
+
+The apiman software provides support for multiple policy rules that can be combined to achieve your desired ???. It includes rules for:
+
+* Securing access based on user identity (authentication), and based on user role (authorization)
+* Limiting access using rate-limiting for fine-grained control, quotas for longer periods, and transfer qoutas for data-intensive operations
+* Enabling/disabling access to subsets of an API
+* Logging and caching 
+* Enabling/disabling access from specific IP adresses
+
+
+=== Advantages of apiman
+
+*Cost:* Using apiman, you will automatically gain from the benefits of using open source software. While cost effectiveness is an important factor when you are starting up,
+it also matters if your APIs become very popular. In this scenario, not having to pay a 3rd party for your API management can make a big difference to your bottom line.
+
+*Extensibility:* While the software provides support for many policies out of the box, it is also extensible through the provision of a plug-in framework.
+
+*Security:* Apiman features enterprise-grade security, with a wide range of encryption, authentication, and authorization protocols supported.
+
+*REST API:* All of the functionality provided by apiman in its Management UI is directly supported in a REST API. 
+ 
+
+
+=== Installing the software
+
+
+=== Quickstart example
+
+
+=== Resources
+
+
+
+
+
+
+
+
