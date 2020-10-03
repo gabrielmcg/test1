@@ -7,10 +7,12 @@ This article will help you to get up and running with *apiman*, an open-source A
 APIs are becoming pervasive in the modern enterprise. External facing APIs allow 3rd party access to your company's content and services, while the trend towards microservices 
 results in loosely coupled services, connected by multiple internal APIs. Using an API gateway helps you to centralize the management of your APIs, providing support for common features such as security, qoutas, logging and caching.
 
-http://www.apiman.io[Apiman] is an open-source API management offering, that makes it easy to control, distribute and monitor your APIs. It consists of two main components:
+http://www.apiman.io[Apiman] is open-source API management software that simplifies the control, distribution and monitoring of your APIs. It consists of two main components:
 
 * An easy-to-use management interface that helps you to define centralized policies for your APIs  
 * A runtime gateway component that executes the rules defined in the configured policies 
+
+=== Apiman features
 
 The apiman software provides support for multiple policy rules that can be combined to achieve your desired ???. It includes rules for:
 
@@ -30,7 +32,7 @@ it also matters if your APIs become very popular. In this scenario, not having t
 
 *Security:* Apiman features enterprise-grade security, with a wide range of encryption, authentication, and authorization protocols supported.
 
-*REST API:* All of the functionality provided by apiman in its Management UI is directly supported in a REST API. 
+*REST API:* All of the functionality provided by apiman in its Management UI is also accessible through a REST API. 
  
 
 
