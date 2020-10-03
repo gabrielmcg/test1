@@ -1,0 +1,10 @@
+== Getting started with Apiman
+
+The article will help you to get up and running with Apiman, an open-source API management and gateway offering.
+
+=== Overview
+
+APIs are becoming pervasive in the enterprise:
+
+* Internally for microservice 
+* Externally to allow controlled 3rd party access to your company's valuable content  and services
