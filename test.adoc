@@ -30,9 +30,9 @@ it also matters if your APIs become very popular. In this scenario, not having t
 
 *Extensibility:* While the software provides support for many policies out of the box, it is also extensible through the provision of a plug-in framework.
 
-*Security:* Apiman features enterprise-grade security, with a wide range of encryption, authentication, and authorization protocols supported.
+*Security:* Apiman provides enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported.
 
-*REST API:* All of the functionality provided by apiman in its Management UI is also accessible through a REST API. 
+*REST API:* All of the functionality provided by apiman in the manager UI is also accessible through a REST API. 
  
 
 
