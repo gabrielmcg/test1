@@ -23,14 +23,14 @@ The apiman software provides support for multiple policy rules that can be combi
 
 === Advantages of apiman
 
-*Cost:* Using apiman, you will automatically gain from the benefits of using open source software. While cost effectiveness is an important factor when you are starting up,
+Cost:: Using apiman, you will automatically gain from the benefits of using open source software. While cost effectiveness is an important factor when you are starting up,
 it also matters if your APIs become very popular. In this scenario, not having to pay a 3rd party for your API management can make a big difference to your bottom line.
 
-*Extensibility:* While the software provides support for many policies out of the box, it is also extensible through the provision of a plug-in framework.
+Extensibility:: While the software provides support for many policies out of the box, it is also extensible through the provision of a plug-in framework.
 
-*Security:* Apiman features enterprise-grade security, with a wide range of encryption, authentication, and authorization protocols supported.
+Security:: Apiman features enterprise-grade security, with a wide range of encryption, authentication, and authorization protocols supported.
 
-*REST API:* All of the functionality provided by apiman in its Management UI is directly supported in a REST API. 
+REST API:: All of the functionality provided by apiman in its Management UI is directly supported in a REST API. 
  
 
 
