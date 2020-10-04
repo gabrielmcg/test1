@@ -68,22 +68,31 @@ Copy the contents of the
 
 Establish that the overlay has worked correctly by checking the WildFly folder for the existence apiman configuration file:
 
+[source]
+----
 $ ls ~/wildfly-10.1.0.Final/standalone/configuration/standalone-apiman.xml
+---- 
  
- 
- === Running the software
+=== Running the software
 
+[source]
+----
 $ cd ~/
 $ ./bin/standalone.sh -c standalone-apiman.xml
+----
 
 
+[source]
+----
 13:26:45,008 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
- 
+----
+
+
  
 Server logs are available at ~/wildfly-10.1.0.Final/standalone/log/server.log
 
 
-Log on to the server at http://127.0.0.1:9990 using the credentials you used for the add-user script.
+Log on to the server at http://127.0.0.1:9990 using the credentials you specified when running the add-user script.
 
 
 Check that the apiman has been deployed correctly at http://127.0.0.1:9990/console/App.html#standalone-deployments
@@ -94,16 +103,71 @@ http://127.0.0.1:8080/apimanui
 admin/admin123!
 
 
-Members - roles of 
-
-API Developer
-Client App Developer
-Organization Owner
-
 
  
-== Quickstart example
+== Setup the quickstart sample API
 
+=== Download the quickstart project
+
+[source]
+----
+$ cd ~
+$ git clone https://github.com/apiman/apiman-quickstarts.git
+
+----
+
+=== Build the sample API
+
+[source]
+----
+$ cd apiman-quickstarts/echo-service
+$ mvn package
+$ ls ./target/apiman-quickstarts-echo-service-1.3.1.Final.war
+----
+
+
+=== Deploy the sample API
+
+Copy the war file to the application server:
+
+[source]
+----
+$ cp ~/apiman-quickstarts/echo-service/target/apiman-quickstarts-echo-service-1.3.1.Final.war ~/wildfly-10.1.0.Final/standalone/deployments/
+----
+
+=== Test the sample API
+
+Use your browser to access the API at http://localhost:8080/apiman-echo. The service should return a response that is an copy (echo) of the request:
+
+[source]
+----
+{
+  "method" : "GET",
+  "resource" : "/apiman-echo",
+  "uri" : "/apiman-echo",
+  "headers" : {
+    "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "Upgrade-Insecure-Requests" : "1",
+    "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
+    "Connection" : "keep-alive",
+    "Sec-Fetch-Dest" : "document",
+    "Sec-Fetch-Site" : "none",
+    "Host" : "localhost:8080",
+    "Accept-Language" : "en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7",
+    "Accept-Encoding" : "gzip, deflate, br",
+    "dnt" : "1",
+    "Sec-Fetch-Mode" : "navigate"
+  },
+  "bodyLength" : null,
+  "bodySha1" : null
+}
+----
+
+
+
+== Use apiman to configure the sample API 
+
+Now you have the sample API working, you can now use apiman to configure access to the API.
 
 === Create new organization
 
@@ -126,9 +190,10 @@ Create a new Plan within the specified Organization, allowing you to assign grou
 http://127.0.0.1:8080/apimanui/api-manager/new-plan
 ----
 
-* Plan Name
-* Initial Version Default is 1.0
-* Description
+* *Organization:* SampleOrg
+* *Plan Name:* Gold
+* *Initial Version:* Default is 1.0
+* *Description:* 
 
 === Add policy to plan
 
@@ -148,21 +213,57 @@ You must lock a plan to make it available to be included in APIs. Locking a plan
 Click the Lock button and the plan status will change to Locked
 
 
-=== Add second plan
+=== Add a second plan
 
 
-* Create plan 
-* Add policy to plan 
-** Policy type - rate limiting
-** Policy configuration  - 5 requests per client app per day
-* Lock plan
+* Create a plan named "Silver"
+* Add a new policy to the plan with: 
+** Policy type of rate limiting
+** Policy configuration set to 5 requests per client app per day
+* Lock the plan
 
 
+=== Create API
+
+
+[source]
+----
+http://127.0.0.1:8080/apimanui/api-manager/new-api
+----
+
+* *API Name:* echo
+* *Initial Version:* - default is 1.0
+* *Description:* The echo service
+
+
+
+The 'Implementation' tab is where you go to configure the details of the real API being managed. This is where you tell apiman where the API is, so that we can actually invoke it at runtime.
+
+[source]
+----
+http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/apis/echo/1.0/impl
+----
+
+
+
+The 'Plans' tab is used to configure which Plans (already defined in the Organization) are available when a Client App wishes to create an API Contract with this API. Optionally, an API can also be marked as "Public", which means that no API Contract is required (the API can be invoked without sending an API Key).
 
 
 
 
 == Resources
+
+
+
+
+Members - roles of 
+
+API Developer
+Client App Developer
+Organization Owner
+
+
+
 
 
 
