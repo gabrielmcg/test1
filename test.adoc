@@ -36,13 +36,133 @@ it also matters if your APIs become very popular. In this scenario, not having t
  
 
 
-=== Installing the software
+== Installing the software
+
+This article describes getting started with apiman version 1.5.7, using WildFly version 10.1 as the host application server. While the examples are shown running on Linux, the software also works on Windows.
+
+=== Prerequisites
+
+* Java
+* Git
+* Maven
+
+=== WildFly
+
+WildFly is an application development platform, based on Jakarta EE. It is highly configurable, and facilitates faster development and testing.
+It is an open source community project, sponsored by Red Hat(TM), and is available for use and distribution under the LGPL v2.1 license.
+
+Download the WildFly software from http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip
+
+Extract the contents of the zip file
+
+Configure a user
 
 
-=== Quickstart example
+=== Apiman
+
+Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip
+
+Extract the contents of the zip file
+
+Copy the contents of the 
+
+Establish that the overlay has worked correctly by checking the WildFly folder for the existence apiman configuration file:
+
+$ ls ~/wildfly-10.1.0.Final/standalone/configuration/standalone-apiman.xml
+ 
+ 
+ === Running the software
+
+$ cd ~/
+$ ./bin/standalone.sh -c standalone-apiman.xml
 
 
-=== Resources
+13:26:45,008 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+ 
+ 
+Server logs are available at ~/wildfly-10.1.0.Final/standalone/log/server.log
+
+
+Log on to the server at http://127.0.0.1:9990 using the credentials you used for the add-user script.
+
+
+Check that the apiman has been deployed correctly at http://127.0.0.1:9990/console/App.html#standalone-deployments
+
+
+http://127.0.0.1:8080/apimanui
+
+admin/admin123!
+
+
+Members - roles of 
+
+API Developer
+Client App Developer
+Organization Owner
+
+
+ 
+== Quickstart example
+
+
+=== Create new organization
+
+Create a new Organization to manage your APIs and Client Apps.   
+
+[source]
+----
+http://127.0.0.1:8080/apimanui/api-manager/new-org
+----
+
+* *Organization Name:* SampleOrg
+* *Description:* A sample organization 
+
+=== Create a new plan
+
+Create a new Plan within the specified Organization, allowing you to assign groups of Policies to APIs. 
+
+[source]
+----
+http://127.0.0.1:8080/apimanui/api-manager/new-plan
+----
+
+* Plan Name
+* Initial Version Default is 1.0
+* Description
+
+=== Add policy to plan
+
+Adding a policy will allow its specific functionality to be applied to the API invocation as part of the overall Policy Chain.
+http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/plans/Gold/1.0/new-policy
+
+* Policy Type Rate-limiting policy
+  Rate Limiting Policy Configuration
+  
+  # of requests: 10
+  Granularity: Client App
+
+=== Lock plan
+
+You must lock a plan to make it available to be included in APIs. Locking a plan renders it immutable, requiring a new version to be created in order to make changes to the plan.
+
+Click the Lock button and the plan status will change to Locked
+
+
+=== Add second plan
+
+
+* Create plan 
+* Add policy to plan 
+** Policy type - rate limiting
+** Policy configuration  - 5 requests per client app per day
+* Lock plan
+
+
+
+
+
+
+== Resources
 
 
 
