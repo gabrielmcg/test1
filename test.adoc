@@ -165,21 +165,26 @@ Use your browser to access the API at http://localhost:8080/apiman-echo. The ser
 
 
 
-== Use apiman to configure the sample API 
+== Configure an API producer
 
 Now you have the sample API working, you can now use apiman to configure access to the API.
 
-=== Create new organization
+. Create an organization and add a plan containing a policy
+. Configure an API specifying the target API implementation and plans to use
 
-Create a new Organization to manage your APIs and Client Apps.   
+
+
+=== Create producer organization
+
+Create a new organization to manage your APIs.   
 
 [source]
 ----
 http://127.0.0.1:8080/apimanui/api-manager/new-org
 ----
 
-* *Organization Name:* SampleOrg
-* *Description:* A sample organization 
+* *Organization Name:* ProducerOrg
+* *Description:* A sample producer organization 
 
 === Create a new plan
 
@@ -190,17 +195,17 @@ Create a new plan within the specified organization:
 http://127.0.0.1:8080/apimanui/api-manager/new-plan
 ----
 
-* *Organization:* SampleOrg
+* *Organization:* ProducerOrg
 * *Plan Name:* Gold
-* *Initial Version:* Default is 1.0
-* *Description:* A sample organization
+* *Initial Version:* 1.0 (default)
+* *Description:* Most expensive plan
 
-=== Add policy to plan
+==== Add policy to plan
 
 Adding a policy to a plan allows the policy's functionality to be applied to the API invocation as part of the overall policy chain.
 
 
-http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/plans/Gold/1.0/new-policy
+http://127.0.0.1:8080/apimanui/api-manager/orgs/ProducerOrg/plans/Gold/1.0/new-policy
 
 * *Policy Type:* Rate-limiting policy
 +
@@ -208,25 +213,19 @@ http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/plans/Gold/1.0/new-pol
 .Rate Limiting Policy Configuration
 * *# of requests:* 10
 * *Granularity:* Client App
+* *Duration:* Hour
 --
 
 
 
-=== Lock plan
+==== Lock plan
 
 You must lock a plan to make it available to be included in APIs. Locking a plan renders it immutable, requiring a new version to be created in order to make changes to the plan.
 
 Click the Lock button and the plan status will change to Locked
 
 
-=== Add a second plan
 
-
-* Create a plan named "Silver"
-* Add a new policy to the plan with: 
-** Policy type of rate limiting
-** Policy configuration set to 5 requests per client app per day
-* Lock the plan
 
 
 === Create API
@@ -238,22 +237,137 @@ http://127.0.0.1:8080/apimanui/api-manager/new-api
 ----
 
 * *API Name:* echo
-* *Initial Version:* - default is 1.0
+* *Initial Version:* 1.0 (default)
 * *Description:* The echo service
 
 
+==== Configure the API implementation
 
-The 'Implementation' tab is where you go to configure the details of the real API being managed. This is where you tell apiman where the API is, so that we can actually invoke it at runtime.
+On the "Implementation" tab for the API, you configure the details of the real API being managed. 
 
 [source]
 ----
-http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/apis/echo/1.0/impl
+http://127.0.0.1:8080/apimanui/api-manager/orgs/ProducerOrg/apis/echo/1.0/impl
+----
+
+* *API Endpoint:* http://localhost:8080/apiman-echo
+* *API Type:* REST (default)
+* *API Content Type:* JSON (default)
+* *API Security:* None (default)
+
+
+==== Configure the API plans
+
+On the "Plans" tab, you configure which plans are available to a client application. If the API is marked as "Public", it can be invoked without sending an API Key. 
+
+Choose the Gold plan that you created earlier and press "Save".
+
+
+=== Publish the API
+
+Click the Publish button to make the API available to consumers.
+
+
+
+
+
+== Configure an API consumer
+
+
+=== Create the consumer organization 
+
+Create a new organization to consume the published API.   
+
+[source]
+----
+http://127.0.0.1:8080/apimanui/api-manager/new-org
+----
+
+* *Organization Name:* ConsumerOrg
+* *Description:* A sample consumer organization 
+
+
+=== Create client application
+
+
+Click the New Client Application button
+
+http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients
+
+
+* *Organization:* ConsumerOrg
+* *Client App Name:*  EchoApp
+* *Initial Version:* 1.0 (default)
+* *Description:* A client application for consuming the echo API
+
+
+=== Create contract
+
+
+. From the EchoApp page (http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0), choose "Search for APIs to consume". If needed, you can use the search box to find the echo API.
+
+. Click on the link to the echo service (or navigate directly to http://127.0.0.1:8080/apimanui/api-manager/browse/orgs/ProducerOrg/echo/1.0).
+
+. Create a new contract for the Gold plan that you created earlier. After clicking on the "Create Contract" button on the Gold plan, you will be presented with 
+a summary of the contract details:
+
+** *Client App:* ConsumerOrg/EchoApp 1.0
+** *Plan:* Gold
+** *API:* ProducerOrg/echo 1.0
+
+. Click "Create Contract" if you are happy with the details in the summary page.
+
+. Click the "Register" button to register the application with the API Gateway, so that the gateway can act as a proxy for the API.
+
+
+
+== Consume the API
+
+
+
+
+http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0/apis
+
+
+
+https://localhost:8443/apiman-gateway/ProducerOrg/echo/1.0?apikey=591c4999-c9d7-4513-a395-79cd903309fc
+
+[source]
+----
+{
+  "method" : "GET",
+  "resource" : "/apiman-echo",
+  "uri" : "/apiman-echo",
+  "headers" : {
+    "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
+    "Connection" : "keep-alive",
+    "Sec-Fetch-Dest" : "document",
+    "Sec-Fetch-Site" : "none",
+    "Host" : "localhost:8080",
+    "Accept-Encoding" : "gzip, deflate, br",
+    "dnt" : "1",
+    "Pragma" : "no-cache",
+    "Sec-Fetch-Mode" : "navigate",
+    "Cache-Control" : "no-cache",
+    "Upgrade-Insecure-Requests" : "1",
+    "Sec-Fetch-User" : "?1",
+    "Accept-Language" : "en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7"
+  },
+  "bodyLength" : null,
+  "bodySha1" : null
+}
 ----
 
 
+[source]
+----
+{"type":"Other","failureCode":10005,"responseCode":429,"message":"Rate limit exceeded.",
+ "headers":{"X-RateLimit-Limit":"10","X-RateLimit-Remaining":"-1","X-RateLimit-Reset":"3088"}}
+----
 
-The 'Plans' tab is used to configure which Plans (already defined in the Organization) are available when a Client App wishes to create an API Contract with this API. Optionally, an API can also be marked as "Public", which means that no API Contract is required (the API can be invoked without sending an API Key).
 
+== Summary
 
 
 
@@ -270,7 +384,14 @@ Organization Owner
 
 
 
+=== Add a second plan
 
+
+* Create a plan named "Silver"
+* Add a new policy to the plan with: 
+** Policy type of rate limiting
+** Policy configuration set to 5 requests per client app per day
+* Lock the plan
 
 
 
