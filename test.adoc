@@ -183,7 +183,7 @@ http://127.0.0.1:8080/apimanui/api-manager/new-org
 
 === Create a new plan
 
-Create a new Plan within the specified Organization, allowing you to assign groups of Policies to APIs. 
+Create a new plan within the specified organization: 
 
 [source]
 ----
@@ -193,18 +193,24 @@ http://127.0.0.1:8080/apimanui/api-manager/new-plan
 * *Organization:* SampleOrg
 * *Plan Name:* Gold
 * *Initial Version:* Default is 1.0
-* *Description:* 
+* *Description:* A sample organization
 
 === Add policy to plan
 
-Adding a policy will allow its specific functionality to be applied to the API invocation as part of the overall Policy Chain.
+Adding a policy to a plan allows the policy's functionality to be applied to the API invocation as part of the overall policy chain.
+
+
 http://127.0.0.1:8080/apimanui/api-manager/orgs/SampleOrg/plans/Gold/1.0/new-policy
 
-* Policy Type Rate-limiting policy
-  Rate Limiting Policy Configuration
-  
-  # of requests: 10
-  Granularity: Client App
+* *Policy Type:* Rate-limiting policy
++
+--
+.Rate Limiting Policy Configuration
+* *# of requests:* 10
+* *Granularity:* Client App
+--
+
+
 
 === Lock plan
 
