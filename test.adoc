@@ -100,7 +100,7 @@ If the server has started up correctly, you should see the address of the WildFl
 13:26:45,008 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ----
 
-NOTE: Server logs are available at ~/wildfly-10.1.0.Final/standalone/log/server.log
+NOTE: Server logs are available at `~/wildfly-10.1.0.Final/standalone/log/server.log`.
 
 To confirm that WildFly has started up correctly, navigate to http://127.0.0.1:9990 in your browser and log on with the credentials you specified when running the `add-user` script earlier. Check that the apiman software has been deployed correctly by navigating to the page http://127.0.0.1:9990/console/App.html#standalone-deployments.
 
@@ -111,7 +111,7 @@ Access the apiman user interface by navigating to http://127.0.0.1:8080/apimanui
 * *Password:* admin123!
 
 WARNING: This article shows you how to get up and running quickly with apiman and it is not intended to be a guide for good practices. For more information on deploying and hardening apiman in a production environment, see the 
-https://apiman.gitbooks.io/apiman-production-guide/content/[https://apiman.gitbooks.io/apiman-production-guide/content/].
+https://apiman.gitbooks.io/apiman-production-guide/content/[Apiman Production Guide].
 
  
 == Deploy the quickstart sample API
@@ -187,7 +187,7 @@ Use your browser to access the API at http://localhost:8080/apiman-echo. The ser
 
 == Configure an API provider
 
-Now that you have the sample API working, you configure access to the API using the following steps:
+Now that you have the sample API working, you can configure access to the API using the following steps:
 
 . Create an organization and add a plan containing a policy
 . Configure an API, specifying the target API implementation and the plan
@@ -320,7 +320,7 @@ Alternatively, navigate directly to the APIs page for the client app using the U
 http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0/apis
 --
 
-. Click the information symbol at the right hand side of the API details, to determine how to invoke the API. This will display a URL for the `apiman-gateway` incuding the API key required: 
+. Click the information symbol at the right hand side of the API details, to determine how to invoke the API. This will display a URL for the `apiman-gateway` incuding the API key required, of the form: 
 +
 [source]
 ----
@@ -367,9 +367,21 @@ https://localhost:8443/apiman-gateway/ProviderOrg/echo/1.0?apikey=591c4999-c9d7-
 
 == Summary
 
+This article has shown you how to get up and running with apiman, an open-source API managment and gateway offering. You should now be able to publish an API for a provider organization wth a rate-limiting policy, and test that policy using a client application associated with a consumer organization. 
 
+This article is based on the "Crash Course in Apiman" document which provides a more comprehensive introduction to apiman. It is available on the apiman website at http://www.apiman.io/latest/crash-course.html. If you would like to know more about apiman functionality in general and how to progress to using the software in a production environment, check the Resources section below.
 
 == Resources
+
+Apiman project page: http://apiman.io/
+
+GitHub repository: https://github.com/apiman/apiman
+
+Apiman user guide: https://apiman.gitbooks.io/apiman-user-guide/content/
+
+Apiman production guide: https://apiman.gitbooks.io/apiman-production-guide/content/
+
+
 
 
 
