@@ -25,12 +25,15 @@ The apiman software provides support for multiple policy rules that can be combi
 
 === Advantages of apiman
 
-In addition to the normal advantages of using open source software, apiman provides benefits in other ways. It offers enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported. While the software provides many policies out-of-the-box, it is also extensible through the provision of a plug-in framework, allowing you to easily add support for the specific rules you require. In addition, all of the functionality provided by apiman in the manager UI is also accessible through a REST API, meaning you can easily automate common tasks.
+In addition to the normal advantages of using open source software, apiman provides benefits in other ways as well. It offers enterprise-grade security functionality, 
+with a wide range of encryption, authentication, and authorization protocols supported. While the software provides many policies out-of-the-box, it is also extensible 
+through the provision of a plug-in framework, allowing you to easily add support for the specific rules you require. Finally, all of the functionality provided by apiman 
+in the manager UI is also accessible through a REST API, meaning you can easily automate common tasks.
 
 
 == Installing the software
 
-This article describes getting started with apiman version 1.5.7, using WildFly version 10.1 as the host application server. While the examples are shown running on Linux, the software also works on Windows.
+This article describes getting started with apiman version 1.5.7, using WildFly version 10.1 as the host application server. The software runs on Linux, Windows and MacOS.
 
 === Prerequisites
 
@@ -152,13 +155,14 @@ Copy the war file to the application server:
 
 [source]
 ----
-$ cp ~/apiman-quickstarts/echo-service/target/apiman-quickstarts-echo-service-1.3.1.Final.war \
+$ cd ~/apiman-quickstarts/echo-service/target/
+$ cp ./apiman-quickstarts-echo-service-1.3.1.Final.war \
   ~/wildfly-10.1.0.Final/standalone/deployments/
 ----
 
 === Test the sample API
 
-Use your browser to access the API at http://localhost:8080/apiman-echo. The service should return a response that is an copy (echo) of the request:
+Use your browser to access the API at http://localhost:8080/apiman-echo. The service should return a response that is a copy (echo) of the request:
 
 [source]
 ----
@@ -212,7 +216,7 @@ Create a new plan within the specified organization with the following configura
 * *Initial Version:* 1.0 (default)
 * *Description:* Most expensive plan
 
-==== Add a policy to plan
+==== Add a policy to the plan
 
 Adding a policy to a plan allows the policy's functionality to be applied to the API invocation as part of the overall policy chain. In this example, a rate-limiting policy is created, to allow a maximum of 10 requests from a client application in one hour:
 
@@ -253,9 +257,10 @@ On the "Implementation" tab for the API, configure the details of the real API b
 * *API Security:* None (default)
 
 
-==== Configure the API plans
+==== Configure the API plan
 
-On the "Plans" tab, you configure which plans are available to a client application. If the API is marked as "Public", it can be invoked without sending an API Key. 
+On the "Plans" tab, you can configure which plans are available to a client application. If the API is marked as "Public", it can be invoked without sending an API Key. 
+This example shows you how to use API keys, so do not mark the API as public in this case.
 
 Choose the Gold plan that you created earlier and press "Save".
 
@@ -268,7 +273,7 @@ To make the API available to consumers, you need to click the "Publish" button.
 
 == Configure an API consumer
 
-When you have published the API through the provider organization, you can configure a consumer organization and a client application to access the configured API.
+Now that you have finished publishing the API through the provider organization, you can configure a consumer organization and a client application to access the configured API.
 
 === Create the consumer organization 
 
@@ -278,7 +283,7 @@ Create a new organization to consume the published API, with the following confi
 * *Description:* A sample consumer organization 
 
 
-=== Create client application
+=== Create a client application
 
 Access the "Client Apps" tab for the consumer organization, and create a new client app with the following configuration:
 
@@ -288,11 +293,11 @@ Access the "Client Apps" tab for the consumer organization, and create a new cli
 * *Description:* A client application for consuming the echo API
 
 
-=== Create contract
+=== Create a contract
 
 A contract links a consumer organization's client app to a specific plan offered by the provider organization's API.
 
-. From the EchoApp page (http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0), choose "Search for APIs to consume". You can enter the term "echo" in the search box to find the echo API.
+. From the EchoApp page, choose "Search for APIs to consume". You can enter the term "echo" in the search box to find the echo API.
 
 . Click on the link to the echo service (or navigate directly to http://127.0.0.1:8080/apimanui/api-manager/browse/orgs/ProviderOrg/echo/1.0).
 
@@ -376,7 +381,7 @@ This article is based on the "Crash Course in Apiman" document which provides a 
 
 Apiman project page: http://apiman.io/
 
-GitHub repository: https://github.com/apiman/apiman
+Apiman GitHub repository: https://github.com/apiman/apiman
 
 Apiman user guide: https://apiman.gitbooks.io/apiman-user-guide/content/
 
