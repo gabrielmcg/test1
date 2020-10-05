@@ -7,7 +7,7 @@ This article will help you to get up and running with *apiman*, an open-source A
 APIs are becoming pervasive in the modern enterprise. External facing APIs allow 3rd party access to your company's content and services, while the trend towards microservices 
 results in loosely coupled services, connected by multiple internal APIs. Using an API gateway helps you to centralize the management of your APIs, providing support for common features such as security, qoutas, logging and caching.
 
-http://www.apiman.io[Apiman] is open-source API management software that simplifies the control, distribution and monitoring of your APIs. It consists of two main components:
+http://www.apiman.io[Apiman] is an open-source, API management software offering that simplifies the control, distribution and monitoring of your APIs. It consists of two main components:
 
 * An easy-to-use management interface that helps you to configure common policies for your APIs  
 * A runtime gateway component that executes the rules defined in the configured policies 
@@ -25,7 +25,7 @@ The apiman software provides support for multiple policy rules that can be combi
 
 === Advantages of apiman
 
-In addition to the normal advantages of using open source software, apiman provides benefits in other ways. It has enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported. While the software provides many policies out-of-the-box, it is also extensible through the provision of a plug-in framework, allowing you to easily add support for the specific rules you require. In addition, all of the functionality provided by apiman in the manager UI is also accessible through a REST API, meaning you can easily automate common tasks.
+In addition to the normal advantages of using open source software, apiman provides benefits in other ways. It offers enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported. While the software provides many policies out-of-the-box, it is also extensible through the provision of a plug-in framework, allowing you to easily add support for the specific rules you require. In addition, all of the functionality provided by apiman in the manager UI is also accessible through a REST API, meaning you can easily automate common tasks.
 
 
 == Installing the software
@@ -36,7 +36,7 @@ This article describes getting started with apiman version 1.5.7, using WildFly 
 
 * *Java JDK 1.8 or newer:* You can use OpenJDK or Oracle's JDK. 
 * *Git:* A git client is needed to download the quickstart sample used in this article.
-* *Maven:*Apache Maven is used to build the quickstart sample. Version 3.6.3 is the latest release and recommended version, but any version from 3.3 will work.
+* *Maven:* Apache Maven is used to build the quickstart sample. Version 3.6.3 is the latest release and recommended version, but any version from 3.3 up will work.
 
 === Installing WildFly
 
@@ -88,12 +88,12 @@ Start the WildFly server, using the apiman configuration file:
 
 [source]
 ----
-$ cd ~/
+$ cd ~/wildfly-10.1.0.Final
 $ ./bin/standalone.sh -c standalone-apiman.xml
 ----
 
 
-If the server has started up correctly, you should see the address of the WildFly administration console in the log information that is displayed: 
+If the server has started up correctly, you should see the address of the WildFly administration console in the log information that is displayed on the screen: 
 
 [source]
 ----
@@ -107,7 +107,7 @@ To confirm that WildFly has started up correctly, navigate to http://127.0.0.1:9
 
 Access the apiman user interface by navigating to http://127.0.0.1:8080/apimanui and logging in with the default credentials:
 
-* *Username or email:* admiin
+* *Username or email:* admin
 * *Password:* admin123!
 
 WARNING: This article shows you how to get up and running quickly with apiman and it is not intended to be a guide for good practices. For more information on deploying and hardening apiman in a production environment, see the 
@@ -118,6 +118,8 @@ https://apiman.gitbooks.io/apiman-production-guide/content/[https://apiman.gitbo
 
 === Download the quickstart project
 
+Use your git client to download the `apiman-quickstarts` project:
+
 [source]
 ----
 $ cd ~
@@ -127,10 +129,18 @@ $ git clone https://github.com/apiman/apiman-quickstarts.git
 
 === Build the sample API
 
+Use Maven to build the sample API:
+
 [source]
 ----
 $ cd apiman-quickstarts/echo-service
 $ mvn package
+----
+
+Check that the build worked by locating the generated `war` file:
+
+[source]
+----
 $ ls ./target/apiman-quickstarts-echo-service-1.3.1.Final.war
 ----
 
@@ -141,7 +151,8 @@ Copy the war file to the application server:
 
 [source]
 ----
-$ cp ~/apiman-quickstarts/echo-service/target/apiman-quickstarts-echo-service-1.3.1.Final.war ~/wildfly-10.1.0.Final/standalone/deployments/
+$ cp ~/apiman-quickstarts/echo-service/target/apiman-quickstarts-echo-service-1.3.1.Final.war \
+  ~/wildfly-10.1.0.Final/standalone/deployments/
 ----
 
 === Test the sample API
@@ -174,76 +185,57 @@ Use your browser to access the API at http://localhost:8080/apiman-echo. The ser
 
 
 
-== Configure an API producer
+== Configure an API provider
 
-Now you have the sample API working, you can now use apiman to configure access to the API.
+Now that you have the sample API working, you configure access to the API using the following steps:
 
 . Create an organization and add a plan containing a policy
-. Configure an API specifying the target API implementation and plans to use
+. Configure an API, specifying the target API implementation and the plan
 
 
 
-=== Create producer organization
+=== Create a provider organization
 
-Create a new organization to manage your APIs.   
+Create a new organization to manage your APIs with the following configuration: 
 
-[source]
-----
-http://127.0.0.1:8080/apimanui/api-manager/new-org
-----
 
-* *Organization Name:* ProducerOrg
-* *Description:* A sample producer organization 
+* *Organization Name:* ProviderOrg
+* *Description:* A sample provider organization 
 
 === Create a new plan
 
-Create a new plan within the specified organization: 
+Create a new plan within the specified organization with the following configuration:
 
-[source]
-----
-http://127.0.0.1:8080/apimanui/api-manager/new-plan
-----
-
-* *Organization:* ProducerOrg
+* *Organization:* ProviderOrg
 * *Plan Name:* Gold
 * *Initial Version:* 1.0 (default)
 * *Description:* Most expensive plan
 
-==== Add policy to plan
+==== Add a policy to plan
 
-Adding a policy to a plan allows the policy's functionality to be applied to the API invocation as part of the overall policy chain.
-
-
-http://127.0.0.1:8080/apimanui/api-manager/orgs/ProducerOrg/plans/Gold/1.0/new-policy
+Adding a policy to a plan allows the policy's functionality to be applied to the API invocation as part of the overall policy chain. In this example, a rate-limiting policy is created, to allow a maximum of 10 requests from a client application in one hour:
 
 * *Policy Type:* Rate-limiting policy
 +
 --
-.Rate Limiting Policy Configuration
+
+.*Rate Limiting Policy Configuration*
 * *# of requests:* 10
 * *Granularity:* Client App
 * *Duration:* Hour
 --
 
 
-
-==== Lock plan
+==== Lock the plan
 
 You must lock a plan to make it available to be included in APIs. Locking a plan renders it immutable, requiring a new version to be created in order to make changes to the plan.
 
-Click the Lock button and the plan status will change to Locked
+Click the "Lock" button and the plan status will change to `Locked`.
 
 
+=== Create an API
 
-
-
-=== Create API
-
-
-[source]
-----
-http://127.0.0.1:8080/apimanui/api-manager/new-api
-----
+From the ProviderOrg page, click on the "APIs" tab and create a new API with the following configuration:
 
 * *API Name:* echo
 * *Initial Version:* 1.0 (default)
@@ -252,12 +244,7 @@ http://127.0.0.1:8080/apimanui/api-manager/new-api
 
 ==== Configure the API implementation
 
-On the "Implementation" tab for the API, you configure the details of the real API being managed. 
-
-[source]
-----
-http://127.0.0.1:8080/apimanui/api-manager/orgs/ProducerOrg/apis/echo/1.0/impl
-----
+On the "Implementation" tab for the API, configure the details of the real API being managed as shown below and then save the implemntation:
 
 * *API Endpoint:* http://localhost:8080/apiman-echo
 * *API Type:* REST (default)
@@ -274,23 +261,17 @@ Choose the Gold plan that you created earlier and press "Save".
 
 === Publish the API
 
-Click the Publish button to make the API available to consumers.
-
-
+To make the API available to consumers, you need to click the "Publish" button.
 
 
 
 == Configure an API consumer
 
+When you have published the API through the provider organization, you can configure a consumer organization and a client application to access the configured API.
 
 === Create the consumer organization 
 
-Create a new organization to consume the published API.   
-
-[source]
-----
-http://127.0.0.1:8080/apimanui/api-manager/new-org
-----
+Create a new organization to consume the published API, with the following configuration:
 
 * *Organization Name:* ConsumerOrg
 * *Description:* A sample consumer organization 
@@ -298,11 +279,7 @@ http://127.0.0.1:8080/apimanui/api-manager/new-org
 
 === Create client application
 
-
-Click the New Client Application button
-
-http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients
-
+Access the "Client Apps" tab for the consumer organization, and create a new client app with the following configuration:
 
 * *Organization:* ConsumerOrg
 * *Client App Name:*  EchoApp
@@ -312,17 +289,18 @@ http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients
 
 === Create contract
 
+A contract links a consumer organization's client app to a specific plan offered by the provider organization's API.
 
-. From the EchoApp page (http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0), choose "Search for APIs to consume". If needed, you can use the search box to find the echo API.
+. From the EchoApp page (http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0), choose "Search for APIs to consume". You can enter the term "echo" in the search box to find the echo API.
 
-. Click on the link to the echo service (or navigate directly to http://127.0.0.1:8080/apimanui/api-manager/browse/orgs/ProducerOrg/echo/1.0).
+. Click on the link to the echo service (or navigate directly to http://127.0.0.1:8080/apimanui/api-manager/browse/orgs/ProviderOrg/echo/1.0).
 
 . Create a new contract for the Gold plan that you created earlier. After clicking on the "Create Contract" button on the Gold plan, you will be presented with 
 a summary of the contract details:
 
 ** *Client App:* ConsumerOrg/EchoApp 1.0
 ** *Plan:* Gold
-** *API:* ProducerOrg/echo 1.0
+** *API:* ProviderOrg/echo 1.0
 
 . Click "Create Contract" if you are happy with the details in the summary page.
 
@@ -332,15 +310,25 @@ a summary of the contract details:
 
 == Consume the API
 
+Once you have registered the client application with the gateway, you are ready to test that client can access the API through the gateway, and that the Gold policy is enforced correctly.
 
 
-
+. Naviagate from the ConsumerApp page to the EchoApp page, and then access the "APIs" tab to list details of the APIs the client can consume.
++
+--
+Alternatively, navigate directly to the APIs page for the client app using the URL:
 http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0/apis
+--
 
+. Click the information symbol at the right hand side of the API details, to determine how to invoke the API. This will display a URL for the `apiman-gateway` incuding the API key required: 
++
+[source]
+----
+https://localhost:8443/apiman-gateway/ProviderOrg/echo/1.0?apikey=591c4999-c9d7-4513-a395-79cd903309fc
+----
 
-
-https://localhost:8443/apiman-gateway/ProducerOrg/echo/1.0?apikey=591c4999-c9d7-4513-a395-79cd903309fc
-
+. Use the URL to invoke the API. The response should be a JSON structure echoing the request configuration, similar to the following:
++
 [source]
 ----
 {
@@ -368,7 +356,8 @@ https://localhost:8443/apiman-gateway/ProducerOrg/echo/1.0?apikey=591c4999-c9d7-
 }
 ----
 
-
+. Continue to invoke the API until you hit the rate limit: 
++
 [source]
 ----
 {"type":"Other","failureCode":10005,"responseCode":429,"message":"Rate limit exceeded.",
@@ -381,28 +370,6 @@ https://localhost:8443/apiman-gateway/ProducerOrg/echo/1.0?apikey=591c4999-c9d7-
 
 
 == Resources
-
-
-
-
-Members - roles of 
-
-API Developer
-Client App Developer
-Organization Owner
-
-
-
-=== Add a second plan
-
-
-* Create a plan named "Silver"
-* Add a new policy to the plan with: 
-** Policy type of rate limiting
-** Policy configuration set to 5 requests per client app per day
-* Lock the plan
-
-
 
 
 
