@@ -38,7 +38,7 @@ This article describes getting started with apiman version 1.5.7, using WildFly 
 * *Git:* A git client is needed to download the quickstart sample used in this article.
 * *Maven:*Apache Maven is used to build the quickstart sample. Version 3.6.3 is the latest release and recommended version, but any version from 3.3 will work.
 
-=== WildFly
+=== Installing WildFly
 
 WildFly is an application development platform, based on Jakarta EE. It is highly configurable, and facilitates faster development and testing.
 It is an open source community project, sponsored by Red Hat(TM), and is available for use and distribution under the LGPL v2.1 license.
@@ -59,15 +59,16 @@ cd ~/wildfly-10.1.0.Final
 +
 If you are running Windows, you should use the `add-user.bat` or `add-user.ps1` script as appropriate.
 
-=== Apiman
+=== Installing apiman
 
-Use the following steps to download and deploy the apiman software:
+Use the following steps to download and deploy apiman:
 
 . Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip
 
 . Extract the contents of the zip file. In the subsequent steps, it is assumed that the apiman content has been extracted to `~/apiman-distro-wildfly10-1.5.7.Final-overlay`.
 
-. Copy the contents of the apiman directory into the WildFly directory. This will result in an *overlay* of the apiman content on top of the WildFly content.
+. Copy the contents of the apiman directory into the WildFly directory. This will result in an *overlay* of some apiman content on top of the existing WildFly content, 
+in particular, the `modules`, `standalone` and `themes` folders.
 +
 [source]
 ----
