@@ -100,8 +100,7 @@ If the server has started up correctly, you should see the address of the WildFl
 13:26:45,008 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ----
 
-NOTE: Server logs are available at 
-+
+NOTE: Server logs are available at +
 `~/wildfly-10.1.0.Final/standalone/log/server.log`.
 
 To confirm that WildFly has started up correctly, navigate to http://127.0.0.1:9990 in your browser and log on with the credentials you specified when running the `add-user` script earlier. Check that the apiman software has been deployed correctly by navigating to the page http://127.0.0.1:9990/console/App.html#standalone-deployments.
