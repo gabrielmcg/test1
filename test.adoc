@@ -63,7 +63,7 @@ If you are running Windows, you should use the `add-user.bat` or `add-user.ps1` 
 
 Use the following steps to download and deploy apiman:
 
-. Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip
+. Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip.
 
 . Extract the contents of the zip file. In the subsequent steps, it is assumed that the apiman content has been extracted to `~/apiman-distro-wildfly10-1.5.7.Final-overlay`.
 
@@ -84,6 +84,8 @@ $ ls ~/wildfly-10.1.0.Final/standalone/configuration/standalone-apiman.xml
  
 === Running the software
 
+Start the WildFly server, using the apiman configuration file:
+
 [source]
 ----
 $ cd ~/
@@ -91,30 +93,28 @@ $ ./bin/standalone.sh -c standalone-apiman.xml
 ----
 
 
+If the server has started up correctly, you should see the address of the WildFly administration console in the log information that is displayed: 
+
 [source]
 ----
 13:26:45,008 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ----
 
+NOTE: Server logs are available at ~/wildfly-10.1.0.Final/standalone/log/server.log
+
+To confirm that WildFly has started up correctly, navigate to http://127.0.0.1:9990 in your browser and log on with the credentials you specified when running the `add-user` script earlier. Check that the apiman software has been deployed correctly by navigating to the page http://127.0.0.1:9990/console/App.html#standalone-deployments.
+
+
+Access the apiman user interface by navigating to http://127.0.0.1:8080/apimanui and logging in with the default credentials:
+
+* *Username or email:* admiin
+* *Password:* admin123!
+
+WARNING: This article shows you how to get up and running quickly with apiman and it is not intended to be a guide for good practices. For more information on deploying and hardening apiman in a production environment, see the 
+https://apiman.gitbooks.io/apiman-production-guide/content/[https://apiman.gitbooks.io/apiman-production-guide/content/].
 
  
-Server logs are available at ~/wildfly-10.1.0.Final/standalone/log/server.log
-
-
-Log on to the server at http://127.0.0.1:9990 using the credentials you specified when running the add-user script.
-
-
-Check that the apiman has been deployed correctly at http://127.0.0.1:9990/console/App.html#standalone-deployments
-
-
-http://127.0.0.1:8080/apimanui
-
-admin/admin123!
-
-
-
- 
-== Setup the quickstart sample API
+== Deploy the quickstart sample API
 
 === Download the quickstart project
 
