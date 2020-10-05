@@ -120,6 +120,9 @@ https://apiman.gitbooks.io/apiman-production-guide/content/[Apiman Production Gu
  
 == Deploy the quickstart sample API
 
+The apiman project provides some examples to help you get started. The echo-service quickstart is a simple service that responds to a HTTP request with a copy (echo) of the 
+request configuration.
+
 === Download the quickstart project
 
 Use your git client to download the `apiman-quickstarts` project:
@@ -137,7 +140,7 @@ Use Maven to build the sample API:
 
 [source]
 ----
-$ cd apiman-quickstarts/echo-service
+$ cd ~/apiman-quickstarts/echo-service
 $ mvn package
 ----
 
@@ -192,7 +195,7 @@ Use your browser to access the API at http://localhost:8080/apiman-echo. The ser
 
 == Configure an API provider
 
-Now that you have the sample API working, you can configure access to the API using the following steps:
+Now that you have the sample API working, you can use apiman to configure access to the API using the following steps:
 
 . Create an organization and add a plan containing a policy
 . Configure an API, specifying the target API implementation and the plan
@@ -316,17 +319,17 @@ a summary of the contract details:
 
 == Consume the API
 
-Once you have registered the client application with the gateway, you are ready to test that client can access the API through the gateway, and that the Gold policy is enforced correctly.
+Once you have registered the client application with the gateway, you are ready to test that the client can access the API through the gateway, and that the Gold policy is enforced correctly.
 
 
-. Naviagate from the ConsumerApp page to the EchoApp page, and then access the "APIs" tab to list details of the APIs the client can consume.
+. Naviagate from the ConsumerApp page to the EchoApp page, and then access the "APIs" tab to list details of the APIs that the client can consume.
 +
 --
-Alternatively, navigate directly to the APIs page for the client app using the URL:
+Alternatively, navigate directly to the APIs page for the client app using the URL +
 http://127.0.0.1:8080/apimanui/api-manager/orgs/ConsumerOrg/clients/EchoApp/1.0/apis
 --
 
-. Click the information symbol at the right hand side of the API details, to determine how to invoke the API. This will display a URL for the `apiman-gateway` incuding the API key required, of the form: 
+. Click the information symbol at the right hand side of the API details, to determine how to invoke the API. This will display a URL for the `apiman-gateway` including the API key required, of the form: 
 +
 [source]
 ----
@@ -373,7 +376,7 @@ https://localhost:8443/apiman-gateway/ProviderOrg/echo/1.0?apikey=591c4999-c9d7-
 
 == Summary
 
-This article has shown you how to get up and running with apiman, an open-source API managment and gateway offering. You should now be able to publish an API for a provider organization wth a rate-limiting policy, and test that policy using a client application associated with a consumer organization. 
+This article has shown you how to get up and running with apiman, an open-source API managment and gateway offering. You should now be able to publish an API for a provider organization with a rate-limiting policy, and test that policy using a client application associated with a consumer organization. 
 
 This article is based on the "Crash Course in Apiman" document which provides a more comprehensive introduction to apiman. It is available on the apiman website at http://www.apiman.io/latest/crash-course.html. If you would like to know more about apiman functionality in general and how to progress to using the software in a production environment, check the Resources section below.
 
