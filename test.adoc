@@ -9,12 +9,12 @@ results in loosely coupled services, connected by multiple internal APIs. Using 
 
 http://www.apiman.io[Apiman] is open-source API management software that simplifies the control, distribution and monitoring of your APIs. It consists of two main components:
 
-* An easy-to-use management interface that helps you to define centralized policies for your APIs  
+* An easy-to-use management interface that helps you to configure common policies for your APIs  
 * A runtime gateway component that executes the rules defined in the configured policies 
 
 === Apiman features
 
-The apiman software provides support for multiple policy rules that can be combined to achieve your desired ???. It includes rules for:
+The apiman software provides support for multiple policy rules that can be combined to achieve your desired outcome. It includes rules for:
 
 * Securing access based on user identity (authentication), and based on user role (authorization)
 * Limiting access using rate-limiting for fine-grained control, quotas for longer periods, and transfer qoutas for data-intensive operations
@@ -25,15 +25,7 @@ The apiman software provides support for multiple policy rules that can be combi
 
 === Advantages of apiman
 
-*Cost:* Using apiman, you will automatically gain from the benefits of using open source software. While cost effectiveness is an important factor when you are starting up,
-it also matters if your APIs become very popular. In this scenario, not having to pay a 3rd party for your API management can make a big difference to your bottom line.
-
-*Extensibility:* While the software provides support for many policies out of the box, it is also extensible through the provision of a plug-in framework.
-
-*Security:* Apiman provides enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported.
-
-*REST API:* All of the functionality provided by apiman in the manager UI is also accessible through a REST API. 
- 
+In addition to the normal advantages of using open source software, apiman provides benefits in other ways. It has enterprise-grade security functionality, with a wide range of encryption, authentication, and authorization protocols supported. While the software provides many policies out-of-the-box, it is also extensible through the provision of a plug-in framework, allowing you to easily add support for the specific rules you require. In addition, all of the functionality provided by apiman in the manager UI is also accessible through a REST API, meaning you can easily automate common tasks.
 
 
 == Installing the software
@@ -42,21 +34,28 @@ This article describes getting started with apiman version 1.5.7, using WildFly 
 
 === Prerequisites
 
-* Java
-* Git
-* Maven
+* *Java JDK 1.8 or newer:* You can use OpenJDK or Oracle's JDK. 
+* *Git:* This is needed to download the quickstart sample used in this article.
+* *Maven:* This is used to build the quickstart sample. Apache Maven 3.6.3 is the latest release and recommended version, but any version from 3.3 will work.
 
 === WildFly
 
 WildFly is an application development platform, based on Jakarta EE. It is highly configurable, and facilitates faster development and testing.
 It is an open source community project, sponsored by Red Hat(TM), and is available for use and distribution under the LGPL v2.1 license.
 
-Download the WildFly software from http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip
+. Download the WildFly software from http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip
 
-Extract the contents of the zip file
+. Extract the contents of the zip file
 
-Configure a user
+. Use the add-user script in the WildFy bin directory to configure a user, for example,
++
+[source]
+----
+cd ~/wildfly-10.1.0.Final
+./bin/add-user.sh -u user1 -p password1
+----
 
+If you are running Windows, you should use the ``add-user.bat`` or ``add-user.ps1`` script as appropriate.
 
 === Apiman
 
