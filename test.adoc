@@ -35,8 +35,8 @@ This article describes getting started with apiman version 1.5.7, using WildFly 
 === Prerequisites
 
 * *Java JDK 1.8 or newer:* You can use OpenJDK or Oracle's JDK. 
-* *Git:* This is needed to download the quickstart sample used in this article.
-* *Maven:* This is used to build the quickstart sample. Apache Maven 3.6.3 is the latest release and recommended version, but any version from 3.3 will work.
+* *Git:* A git client is needed to download the quickstart sample used in this article.
+* *Maven:*Apache Maven is used to build the quickstart sample. Version 3.6.3 is the latest release and recommended version, but any version from 3.3 will work.
 
 === WildFly
 
@@ -47,14 +47,14 @@ It is an open source community project, sponsored by Red Hat(TM), and is availab
 
 . Extract the contents of the zip file
 
-. Use the add-user script in the WildFy bin directory to configure a user, for example,
+. Use the ``add-user.sh`` script in the WildFy ``bin`` directory to configure a user, for example,
 +
 [source]
 ----
 cd ~/wildfly-10.1.0.Final
 ./bin/add-user.sh -u user1 -p password1
 ----
-
++
 If you are running Windows, you should use the ``add-user.bat`` or ``add-user.ps1`` script as appropriate.
 
 === Apiman
