@@ -43,11 +43,13 @@ This article describes getting started with apiman version 1.5.7, using WildFly 
 WildFly is an application development platform, based on Jakarta EE. It is highly configurable, and facilitates faster development and testing.
 It is an open source community project, sponsored by Red Hat(TM), and is available for use and distribution under the LGPL v2.1 license.
 
-. Download the WildFly software from http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip
+Use the following steps to download and configure the WildFly software:
 
-. Extract the contents of the zip file
+. Download the WildFly software from http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.zip.
 
-. Use the ``add-user.sh`` script in the WildFy ``bin`` directory to configure a user, for example,
+. Extract the contents of the zip file. In this remainder of this article, it is assumed that the WildFly content has been extracted to `~/wildfly-10.1.0.Final`.
+
+. Use the `add-user.sh` script in the WildFy `bin` directory to configure a user, for example,
 +
 [source]
 ----
@@ -55,18 +57,25 @@ cd ~/wildfly-10.1.0.Final
 ./bin/add-user.sh -u user1 -p password1
 ----
 +
-If you are running Windows, you should use the ``add-user.bat`` or ``add-user.ps1`` script as appropriate.
+If you are running Windows, you should use the `add-user.bat` or `add-user.ps1` script as appropriate.
 
 === Apiman
 
-Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip
+Use the following steps to download and deploy the apiman software:
 
-Extract the contents of the zip file
+. Download the apiman software from http://downloads.jboss.org/apiman/1.5.7.Final/apiman-distro-wildfly10-1.5.7.Final-overlay.zip
 
-Copy the contents of the 
+. Extract the contents of the zip file. In the subsequent steps, it is assumed that the apiman content has been extracted to `~/apiman-distro-wildfly10-1.5.7.Final-overlay`.
 
-Establish that the overlay has worked correctly by checking the WildFly folder for the existence apiman configuration file:
+. Copy the contents of the apiman directory into the WildFly directory. This will result in an *overlay* of the apiman content on top of the WildFly content.
++
+[source]
+----
+cp -r ~/apiman-distro-wildfly10-1.5.7.Final-overlay/.  ~/wildfly-10.1.0.Final/
+----
 
+. Check that the overlay has worked correctly by locating the apiman configuration file in the correct the WildFly folder:
++
 [source]
 ----
 $ ls ~/wildfly-10.1.0.Final/standalone/configuration/standalone-apiman.xml
